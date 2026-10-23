@@ -17,5 +17,5 @@ export const metadata: Metadata = {
 }
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="ar" dir="rtl"><body><script dangerouslySetInnerHTML={{ __html: `(() => { const cleanUrl = window.location.pathname + window.location.search; if (window.location.hash) window.history.replaceState(null, '', cleanUrl); window.scrollTo(0, 0); })()` }} />{children}</body></html>
+  return <html lang="ar" dir="rtl"><body>{children}</body></html>
 }
