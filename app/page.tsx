@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ArrowUpLeft, CircleDot, ExternalLink, Link, Moon, Play, Sparkles, Sun } from 'lucide-react'
 
 const channels = [
@@ -20,6 +20,15 @@ export default function Home() {
   const [language, setLanguage] = useState<'ar' | 'en'>('ar')
   const [dark, setDark] = useState(true)
   const isArabic = language === 'ar'
+
+  useEffect(() => {
+    if ('scrollRestoration' in window.history) window.history.scrollRestoration = 'manual'
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+
+    return () => {
+      if ('scrollRestoration' in window.history) window.history.scrollRestoration = 'auto'
+    }
+  }, [])
   const copy = isArabic ? {
     about: 'عنّي', work: 'مجالاتي', channels: 'القنوات', contact: 'تواصل', official: 'الموقع الرسمي',
     creator: 'صانع محتوى متعدد الشغف', discover: 'اكتشف عالم شِعب', watch: 'شاهد المحتوى',
