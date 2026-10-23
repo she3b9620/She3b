@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { ArrowUpLeft, CircleDot, ExternalLink, Link, Moon, Play, Sparkles, Sun } from 'lucide-react'
+import { ArrowUpLeft, CircleDot, ExternalLink, Link, Moon, Play, Sparkles, Sun, X } from 'lucide-react'
 
 const channels = [
   { title: 'SHE3B', type: 'القناة الرئيسية', desc: 'محتوى متنوع من عالم شِعب', mark: 'S', href: 'https://youtube.com/@She3bTv' },
@@ -48,6 +48,7 @@ const socialGroups = [
 export default function Home() {
   const [language, setLanguage] = useState<'ar' | 'en'>('ar')
   const [dark, setDark] = useState(true)
+  const [lightboxImage, setLightboxImage] = useState<string | null>(null)
   const isArabic = language === 'ar'
 
   useEffect(() => {
@@ -71,6 +72,13 @@ export default function Home() {
     creator: 'Multi-passionate creator', discover: 'Discover She3b', watch: 'Watch content',
     title: <>Every story<br/><em>has a world.</em></>, lede: <>I&apos;m Muhammad Shaaban, better known as <strong>She3b</strong>. I create content about cinema, gaming, and sports — telling stories through image and sound.</>
   }
+  useEffect(() => {
+    if (!lightboxImage) return
+    const closeOnEscape = (event: KeyboardEvent) => event.key === 'Escape' && setLightboxImage(null)
+    window.addEventListener('keydown', closeOnEscape)
+    return () => window.removeEventListener('keydown', closeOnEscape)
+  }, [lightboxImage])
+
   return <main className={dark ? 'theme-dark' : 'theme-light'} dir={isArabic ? 'rtl' : 'ltr'}><div className="pattern-layer" aria-hidden="true" /><div className="page-edge-feather" aria-hidden="true" />
     <nav className="nav container">
       <a className="brand" href="#top"><img className="brand-logo" src="/images/she3b-official-logo.png" alt={isArabic ? 'اللوجو الرسمي لمنصة شِعب' : 'Official She3b Production logo'} /><span>{isArabic ? 'شِعب' : 'She3b'}<span className="dot">.</span></span></a>
@@ -99,7 +107,9 @@ export default function Home() {
 
     <section id="short-edits" className="video-work section container"><div className="section-heading"><div><div className="section-tag">09 — {isArabic ? 'إيديت عادي' : 'Regular edits'}</div><h2>{isArabic ? <>إيديت،<br/><span>من كل يوم.</span></> : <>Everyday edits,<br/><span>my way.</span></>}</h2></div><p>{isArabic ? 'مجموعة من الإيديتس القصيرة والتجارب البصرية السريعة.' : 'Short edits and quick visual experiments.'}</p></div><div className="video-grid">{[['W5MF3GocPNY','إيديت قصير ١'],['l6sPXGTX4Lc','إيديت قصير ٢']].map(([id,title])=><article className="video-card" key={id}><div className="video-frame vertical"><iframe src={`https://www.youtube.com/embed/${id}`} title={title} loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen /></div><h3>{isArabic ? title : 'Short edit'}</h3></article>)}</div></section>
 
-    <section id="photography" className="gallery section container"><div className="section-heading"><div><div className="section-tag">07 — {isArabic ? 'التصوير الفوتوغرافي' : 'Photography'}</div><h2>{isArabic ? <>لحظات،<br/><span>بعدسة شِعب.</span></> : <>Moments,<br/><span>through my lens.</span></>}</h2></div><p>{isArabic ? 'مجموعة من الصور الشخصية، اللقطات الخارجية، وتفاصيل الحياة اليومية التي التقطتها بالكاميرا.' : 'Portraits, outdoor moments, and everyday details captured through my camera.'}</p></div><div className="site-gallery photo-gallery">{['https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-aIBnyYBkgTxB0COyWqi1vU52ht1K1y.png','https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-ajLrTJuXSf4ZtvZSOZnOkSiY7meaRh.png','https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-NTvUYyB1vHwu49UVj5CS4vkLZuvRXC.png','https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-vr7lIIIzWamD5wjcFlKtF7ZwgHK84D.png','https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-XRluMuD5HiDrfvoeRyHFYW530Vk6Dd.png','https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-tg8p7nYCLh9i7q3Qfh3bE9Zs3hM5Aa.png','https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-omiO2ZiHnKj3hwVQxJ9VAC0Y4KjsUP.png','https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-MAgBzNuVDRo4Fk7jxG4ftxd7PYPsuJ.png','https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-Zr44YMnGjWvizlxOsvJF6VVo2TXfpw.png','https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-9g6tResPoV3mzMGg0O4VBgsAyJer3K.png','https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-S29LOGpUfpzFVgtTUnJpQHWm15qRIR.png'].map((src,index)=><img key={src} src={src} alt={isArabic ? `صورة فوتوغرافية من أعمال شِعب ${index+1}` : `She3b photography sample ${index+1}`} loading="lazy" />)}</div></section>
+    <section id="photography" className="gallery section container"><div className="section-heading"><div><div className="section-tag">07 — {isArabic ? 'التصوير الفوتوغرافي' : 'Photography'}</div><h2>{isArabic ? <>لحظات،<br/><span>بعدسة شِعب.</span></> : <>Moments,<br/><span>through my lens.</span></>}</h2></div><p>{isArabic ? 'مجموعة من الصور الشخصية، اللقطات الخارجية، وتفاصيل الحياة اليومية التي التقطتها بالكاميرا.' : 'Portraits, outdoor moments, and everyday details captured through my camera.'}</p></div><div className="site-gallery photo-gallery">{['https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-aIBnyYBkgTxB0COyWqi1vU52ht1K1y.png','https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-ajLrTJuXSf4ZtvZSOZnOkSiY7meaRh.png','https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-NTvUYyB1vHwu49UVj5CS4vkLZuvRXC.png','https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-vr7lIIIzWamD5wjcFlKtF7ZwgHK84D.png','https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-XRluMuD5HiDrfvoeRyHFYW530Vk6Dd.png','https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-tg8p7nYCLh9i7q3Qfh3bE9Zs3hM5Aa.png','https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-omiO2ZiHnKj3hwVQxJ9VAC0Y4KjsUP.png','https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-MAgBzNuVDRo4Fk7jxG4ftxd7PYPsuJ.png','https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-Zr44YMnGjWvizlxOsvJF6VVo2TXfpw.png','https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-9g6tResPoV3mzMGg0O4VBgsAyJer3K.png','https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-S29LOGpUfpzFVgtTUnJpQHWm15qRIR.png'].map((src,index)=><img key={src} src={src} alt={isArabic ? `صورة فوتوغرافية من أعمال شِعب ${index+1}` : `She3b photography sample ${index+1}`} loading="lazy" onClick={() => setLightboxImage(src)} />)}</div></section>
+
+    {lightboxImage && <div className="lightbox" role="dialog" aria-modal="true" aria-label={isArabic ? 'عرض الصورة' : 'Image preview'} onClick={() => setLightboxImage(null)}><button className="lightbox-close" type="button" onClick={() => setLightboxImage(null)} aria-label={isArabic ? 'إغلاق الصورة' : 'Close image'}><X size={22}/></button><img src={lightboxImage} alt={isArabic ? 'الصورة بالحجم الكامل' : 'Full-size preview'} onClick={(event) => event.stopPropagation()} /></div>}
 
     <section id="social" className="social-hub section container"><div className="section-heading"><div><div className="section-tag">10 — {isArabic ? 'تجميعة السوشيال' : 'Social hub'}</div><h2>{isArabic ? <>كل الأماكن،<br/><span>في مكان واحد.</span></> : <>Everywhere I am,<br/><span>in one place.</span></>}</h2></div><p>{isArabic ? 'تابع شِعب على الحسابات والمنصات المختلفة، واختار المكان الأقرب لك.' : 'Find She3b across every platform and choose the community that fits you.'}</p></div><div className="social-groups">{socialGroups.map((group)=><section className="social-group" key={group.label}><div className="social-group-heading"><h3>{isArabic ? group.title : group.label}</h3><span>{group.label}</span></div><div className="social-links">{group.links.map(([platform,name,href])=><a className="social-link" href={href} target="_blank" rel="noreferrer" key={href}><span className="social-mark">{platform.slice(0,1)}</span><span><strong>{name}</strong><small>{platform}</small></span><ExternalLink size={16}/></a>)}</div></section>)}</div></section>
 
