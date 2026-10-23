@@ -42,7 +42,7 @@ export default function Home() {
     creator: 'Multi-passionate creator', discover: 'Discover She3b', watch: 'Watch content',
     title: <>Every story<br/><em>has a world.</em></>, lede: <>I&apos;m Muhammad Shaaban, better known as <strong>She3b</strong>. I create content about cinema, gaming, and sports — telling stories through image and sound.</>
   }
-  return <main className={dark ? 'theme-dark' : 'theme-light'} dir={isArabic ? 'rtl' : 'ltr'}>
+  return <main className={dark ? 'theme-dark' : 'theme-light'} dir={isArabic ? 'rtl' : 'ltr'}><div className="pattern-layer" aria-hidden="true" />
     <nav className="nav container">
       <a className="brand" href="#top"><img className="brand-logo" src="/images/she3b-official-logo.png" alt={isArabic ? 'اللوجو الرسمي لمنصة شِعب' : 'Official She3b Production logo'} /><span>{isArabic ? 'شِعب' : 'She3b'}<span className="dot">.</span></span></a>
       <div className="nav-links"><a href="#about">{copy.about}</a><a href="#experience">{isArabic ? 'خبرتي' : 'Experience'}</a><a href="#work">{copy.work}</a><a href="#channels">{copy.channels}</a><a href="#contact">{copy.contact}</a></div>
