@@ -1,4 +1,7 @@
-import { ArrowUpLeft, CircleDot, ExternalLink, Link, Play, Sparkles } from 'lucide-react'
+'use client'
+
+import { useState } from 'react'
+import { ArrowUpLeft, CircleDot, ExternalLink, Link, Moon, Play, Sparkles, Sun } from 'lucide-react'
 
 const channels = [
   { title: 'SHE3B', type: 'القناة الرئيسية', desc: 'محتوى متنوع من عالم شِعب', mark: 'S', href: 'https://www.youtube.com/@SHE3B' },
@@ -14,15 +17,27 @@ const work = [
 ]
 
 export default function Home() {
-  return <main>
+  const [language, setLanguage] = useState<'ar' | 'en'>('ar')
+  const [dark, setDark] = useState(true)
+  const isArabic = language === 'ar'
+  const copy = isArabic ? {
+    about: 'عنّي', work: 'مجالاتي', channels: 'القنوات', contact: 'تواصل', official: 'الموقع الرسمي',
+    creator: 'صانع محتوى متعدد الشغف', discover: 'اكتشف عالم شِعب', watch: 'شاهد المحتوى',
+    title: <>كل قصة<br/><em>لها عالم.</em></>, lede: <>أنا محمد شعبان، لكن أغلب الناس تعرفني باسم <strong>شِعب</strong>. أصنع محتوى عن السينما والألعاب والرياضة، وأحكي الحكايات بالصورة والصوت.</>
+  } : {
+    about: 'About', work: 'What I do', channels: 'Channels', contact: 'Contact', official: 'Official website',
+    creator: 'Multi-passionate creator', discover: 'Discover She3b', watch: 'Watch content',
+    title: <>Every story<br/><em>has a world.</em></>, lede: <>I&apos;m Mohamed Shaaban, better known as <strong>She3b</strong>. I create content about cinema, gaming, and sports — telling stories through image and sound.</>
+  }
+  return <main className={dark ? 'theme-dark' : 'theme-light'} dir={isArabic ? 'rtl' : 'ltr'}>
     <nav className="nav container">
       <a className="brand" href="#top"><span className="brand-mark">ش</span><span>شِعب<span className="dot">.</span></span></a>
-      <div className="nav-links"><a href="#about">عنّي</a><a href="#work">مجالاتي</a><a href="#channels">القنوات</a><a href="#contact">تواصل</a></div>
-      <a className="nav-cta" href="https://she3b.odoo.com" target="_blank" rel="noreferrer">الموقع الرسمي <ArrowUpLeft size={16}/></a>
+      <div className="nav-links"><a href="#about">{copy.about}</a><a href="#work">{copy.work}</a><a href="#channels">{copy.channels}</a><a href="#contact">{copy.contact}</a></div>
+      <div className="nav-tools"><button className="tool-button" onClick={() => setLanguage(isArabic ? 'en' : 'ar')} aria-label="Change language">{isArabic ? 'EN' : 'عربي'}</button><button className="tool-button" onClick={() => setDark(!dark)} aria-label="Toggle theme">{dark ? <Sun size={16}/> : <Moon size={16}/>}</button><a className="nav-cta" href="https://she3b.odoo.com" target="_blank" rel="noreferrer">{copy.official} <ArrowUpLeft size={16}/></a></div>
     </nav>
 
     <section id="top" className="hero container">
-      <div className="hero-copy"><p className="eyebrow"><Sparkles size={15}/> صانع محتوى متعدد الشغف</p><h1>كل قصة<br/><em>لها عالم.</em></h1><p className="hero-lede">أنا محمد شعبان، لكن أغلب الناس تعرفني باسم <strong>شِعب</strong>. أصنع محتوى عن السينما والألعاب والرياضة، وأحكي الحكايات بالصورة والصوت.</p><div className="hero-actions"><a className="button button-fill" href="#about">اكتشف عالم شِعب <ArrowUpLeft size={18}/></a><a className="button button-ghost" href="#channels"><Play size={16} fill="currentColor"/> شاهد المحتوى</a></div></div>
+      <div className="hero-copy"><p className="eyebrow"><Sparkles size={15}/> {copy.creator}</p><h1>{copy.title}</h1><p className="hero-lede">{copy.lede}</p><div className="hero-actions"><a className="button button-fill" href="#about">{copy.discover} <ArrowUpLeft size={18}/></a><a className="button button-ghost" href="#channels"><Play size={16} fill="currentColor"/> {copy.watch}</a></div></div>
       <div className="hero-art"><div className="art-ring ring-one"/><div className="art-ring ring-two"/><div className="portrait-card"><div className="portrait-glow"/><span className="portrait-letter">ش</span><p>MOHAMED<br/>SHAABAN</p></div><div className="floating-note note-top">01 / creator</div><div className="floating-note note-bottom">film · games · life</div></div>
       <div className="scroll-cue"><span>مرّر لاكتشاف المزيد</span><span className="line"/></div>
     </section>
