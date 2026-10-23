@@ -27,7 +27,7 @@ export default function Home() {
   } : {
     about: 'About', work: 'What I do', channels: 'Channels', contact: 'Contact', official: 'Official website',
     creator: 'Multi-passionate creator', discover: 'Discover She3b', watch: 'Watch content',
-    title: <>Every story<br/><em>has a world.</em></>, lede: <>I&apos;m Mohamed Shaaban, better known as <strong>She3b</strong>. I create content about cinema, gaming, and sports — telling stories through image and sound.</>
+    title: <>Every story<br/><em>has a world.</em></>, lede: <>I&apos;m Muhammad Shaaban, better known as <strong>She3b</strong>. I create content about cinema, gaming, and sports — telling stories through image and sound.</>
   }
   return <main className={dark ? 'theme-dark' : 'theme-light'} dir={isArabic ? 'rtl' : 'ltr'}>
     <nav className="nav container">
