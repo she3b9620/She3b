@@ -22,6 +22,10 @@ export default function Home() {
   const isArabic = language === 'ar'
 
   useEffect(() => {
+    document.title = isArabic ? 'منصة "شِعب" المرئية' : 'She3b Production Site'
+  }, [isArabic])
+
+  useEffect(() => {
     if ('scrollRestoration' in window.history) window.history.scrollRestoration = 'manual'
     window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
 
