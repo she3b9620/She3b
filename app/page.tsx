@@ -59,9 +59,10 @@ export default function Home() {
 
   useLayoutEffect(() => {
     if ('scrollRestoration' in window.history) window.history.scrollRestoration = 'manual'
-    window.scrollTo(0, 0)
+  window.history.replaceState(null, '', window.location.pathname + window.location.search)
+  window.scrollTo(0, 0)
 
-    return () => {
+  return () => {
       if ('scrollRestoration' in window.history) window.history.scrollRestoration = 'auto'
     }
   }, [])
