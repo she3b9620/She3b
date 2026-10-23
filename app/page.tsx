@@ -2,7 +2,6 @@
 
 import { createPortal } from 'react-dom'
 import { useEffect, useState } from 'react'
-import type { MouseEvent } from 'react'
 import { ArrowUpLeft, CircleDot, ExternalLink, Link, Moon, Play, Sparkles, Sun, X } from 'lucide-react'
 
 const channels = [
@@ -74,16 +73,6 @@ export default function Home() {
     creator: 'Multi-passionate creator', discover: 'Discover She3b', watch: 'Watch content',
     title: <>Every story<br/><em>has a world.</em></>, lede: <>I&apos;m Muhammad Shaaban, better known as <strong>She3b</strong>. I create content about cinema, gaming, and sports — telling stories through image and sound.</>
   }
-  const scrollToSection = (event: MouseEvent<HTMLAnchorElement>) => {
-    event.preventDefault()
-    const selector = event.currentTarget.getAttribute('href')
-    if (!selector) return
-    const target = document.querySelector(selector)
-    if (!target) return
-    const top = target.getBoundingClientRect().top + window.scrollY
-    window.scrollTo({ top, behavior: 'smooth' })
-  }
-
   useEffect(() => {
     if (!lightboxImage) return
     const previousOverflow = document.body.style.overflow
@@ -98,8 +87,8 @@ export default function Home() {
 
   return <main className={dark ? 'theme-dark' : 'theme-light'} dir={isArabic ? 'rtl' : 'ltr'}><div className="pattern-layer" aria-hidden="true" /><div className="page-edge-feather" aria-hidden="true" />
     <nav className="nav container">
-      <a className="brand" href="#top" onClick={scrollToSection}><img className="brand-logo" src="/images/she3b-official-logo.png" alt={isArabic ? 'اللوجو الرسمي لمنصة شِعب' : 'Official She3b Production logo'} /><span>{isArabic ? 'شِعب' : 'She3b'}<span className="dot">.</span></span></a>
-      <div className="nav-links"><a href="#about" onClick={scrollToSection}>{copy.about}</a><a href="#experience" onClick={scrollToSection}>{isArabic ? 'خبرتي' : 'Experience'}</a><a href="#work" onClick={scrollToSection}>{copy.work}</a><a href="#projects" onClick={scrollToSection}>{isArabic ? 'شغلي' : 'My work'}</a><a href="#edits" onClick={scrollToSection}>{isArabic ? 'الإيديت' : 'Edits'}</a><a href="#directing" onClick={scrollToSection}>{isArabic ? 'إخراج وتمثيل' : 'Directing & Acting'}</a><a href="#trailers" onClick={scrollToSection}>{isArabic ? 'تريلرز' : 'Trailers'}</a><a href="#social" onClick={scrollToSection}>{isArabic ? 'السوشيال' : 'Social'}</a><a href="#channels" onClick={scrollToSection}>{copy.channels}</a><a href="#contact" onClick={scrollToSection}>{copy.contact}</a></div>
+      <a className="brand" href="#top"><img className="brand-logo" src="/images/she3b-official-logo.png" alt={isArabic ? 'اللوجو الرسمي لمنصة شِعب' : 'Official She3b Production logo'} /><span>{isArabic ? 'شِعب' : 'She3b'}<span className="dot">.</span></span></a>
+      <div className="nav-links"><a href="#about">{copy.about}</a><a href="#experience">{isArabic ? 'خبرتي' : 'Experience'}</a><a href="#work">{copy.work}</a><a href="#projects">{isArabic ? 'شغلي' : 'My work'}</a><a href="#edits">{isArabic ? 'الإيديت' : 'Edits'}</a><a href="#directing">{isArabic ? 'إخراج وتمثيل' : 'Directing & Acting'}</a><a href="#trailers">{isArabic ? 'تريلرز' : 'Trailers'}</a><a href="#social">{isArabic ? 'السوشيال' : 'Social'}</a><a href="#channels">{copy.channels}</a><a href="#contact">{copy.contact}</a></div>
       <div className="nav-tools"><button className="tool-button" onClick={() => setLanguage(isArabic ? 'en' : 'ar')} aria-label={isArabic ? 'Switch to English' : 'التبديل إلى العربية'}>{isArabic ? 'EN' : 'عربي'}</button><button className="tool-button" onClick={() => setDark(!dark)} aria-label={dark ? (isArabic ? 'تفعيل الوضع الفاتح' : 'Switch to light mode') : (isArabic ? 'تفعيل الوضع الداكن' : 'Switch to dark mode')}>{dark ? <Sun size={16}/> : <Moon size={16}/>}</button><a className="nav-cta" href="https://sites.google.com/view/she3bproduction" target="_blank" rel="noreferrer">{copy.official} <ArrowUpLeft size={16}/></a></div>
     </nav>
 
